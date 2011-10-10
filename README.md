@@ -1,44 +1,38 @@
-# Config.JSON
+# Config.ini
 
-*JSON Config Driver*
+*ini Config Driver*
 
 - **Module Version:** 1.0.0
-- **Module URL:** <http://github.com/Zeelot/kohana-config.json>
-- **Compatible Kohana Version(s):** 3.0.x
+- **Module URL:** http://github.com/jengo/kohana-config.ini
+- **Forked from URL:** http://github.com/Zeelot/kohana-config.json
+- **Compatible Kohana Version(s):** 3.2.x
 
 ## Description
 
-A simple JSON driver for the Kohana 3.x config system. I was simply tired of writing PHP arrays so I 
-thought this would be simple enough to implement. This also adds the little benefit of making your 
-config files portable to other languages (as long as they implement something similar). Also note 
-that JSON is a subset of YAML 1.2 so many of the frameworks using YAML config files will be able to 
-use these JSON config files (as long as they implement YAML 1.2 or above).
+This is an INI config parser for Kohana 3.2.  Forked from the JSON driver that is for Kohana 3.1 and lower.
+parse_ini_file() is faster than including an array and faster than file_get_contests() + json_decode().
 
 ## Requirements & Installation
 
 1. Download or clone this repository to your Kohana modules directory
 2. Enable the module in your `bootstrap.php` file
-3. Attach the JSON reader to a directory of your choosing
+3. Attach the ini reader to a directory of your choosing, default is the standard Kohana config directory
 
 <pre></code>/**
- * This attaches the json reader to a config.json directory
- * (ex: application/config.json/hello.json)
+ * This attaches the ini reader to a config.json directory
+ * (ex: application/config/example.ini)
  */
-Kohana::$config->attach(new Config_JSON('config.json'));
+Kohana::$config->attach(new Config_INI('config'));
 </code></pre>
 
-## Example JSON File
+## Example ini File
 
-`application/config.json/example.json`
+`application/config/example.ini`
 
-	{
-		"some_key": "some value",
-		"another_key": {
-			"foo": "bar",
-			"bars": ["bar1", "bar2", "bar3"]
-		}
-	}
+[mail]
+from=nobody@example.com
+
 
 ## Example Usage
 
-	Kohana::config('example')->another_key[bars][1]; // "bar2"
+	$mail_from = Kohana::$config->load('test')->mail['from'];

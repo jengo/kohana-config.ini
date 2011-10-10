@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Config_JSON extends Kohana_Config_Reader {
+class Kohana_Config_INI implements Kohana_Config_Reader {
 
 	// Configuration group name
 	protected $_configuration_group;
@@ -12,9 +12,6 @@ class Kohana_Config_JSON extends Kohana_Config_Reader {
 	{
 		// Set the configuration directory name
 		$this->_directory = trim($directory, '/');
-
-		// Load the empty array
-		parent::__construct();
 	}
 
 	/**
@@ -29,19 +26,18 @@ class Kohana_Config_JSON extends Kohana_Config_Reader {
 	 */
 	public function load($group, array $config = NULL)
 	{
-		if ($files = Kohana::find_file($this->_directory, $group, 'json', TRUE))
+		if ($files = Kohana::find_file($this->_directory, $group, 'ini', TRUE))
 		{
 			// Initialize the config array
 			$config = array();
 
 			foreach ($files as $file)
 			{
-				// Merge each file to the configuration array
-				$config = Arr::merge($config, json_decode(file_get_contents($file), TRUE));
+				$config = Arr::merge($config, parse_ini_file($file, TRUE));
 			}
 		}
 
-		return parent::load($group, $config);
+		return $config;
 	}
 
-} // End Config JSON
+} // End Config INI
