@@ -30,6 +30,7 @@ Kohana::$config->attach(new Config_INI('config'));
 `application/config/example.ini`
 
 [mail]
+
 from=nobody@example.com
 
 
