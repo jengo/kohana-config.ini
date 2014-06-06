@@ -5,11 +5,11 @@
 - **Module Version:** 1.0.0
 - **Module URL:** http://github.com/jengo/kohana-config.ini
 - **Forked from URL:** http://github.com/Zeelot/kohana-config.json
-- **Compatible Kohana Version(s):** 3.2.x
+- **Compatible Kohana Version(s):** 3.2.x, 3.3.x
 
 ## Description
 
-This is an INI config parser for Kohana 3.2.  Forked from the JSON driver that is for Kohana 3.1 and lower.
+This is an INI config parser for Kohana 3.2+  Forked from the JSON driver that is for Kohana 3.1 and lower.
 parse_ini_file() is faster than including an array and faster than file_get_contests() + json_decode().
 
 ## Requirements & Installation
@@ -19,7 +19,7 @@ parse_ini_file() is faster than including an array and faster than file_get_cont
 3. Attach the ini reader to a directory of your choosing, default is the standard Kohana config directory
 
 <pre></code>/**
- * This attaches the ini reader to a config.json directory
+ * This attaches the ini reader to a config directory
  * (ex: application/config/example.ini)
  */
 Kohana::$config->attach(new Config_INI('config'));
@@ -36,4 +36,5 @@ from=nobody@example.com
 
 ## Example Usage
 
-	$mail_from = Kohana::$config->load('test')->mail['from'];
+	$mail_from = Kohana::$config->load('example')->mail['from'];
+
